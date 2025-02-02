@@ -78,18 +78,26 @@
         <br>
         <p>Ispod na slikama možete vidjeti kako izgledaju preporuke koje dodajemo u grupu.</p>
 <br>
-<!-- Like Button Section -->
-        <button class="like-button" onclick="increaseLikes()">Sviđa mi se</button>
-        <div class="like-count" id="like-count">230 ljudi je reklo da im se ovo sviđa</div>
+ <!-- Like dugme i broj lajkova -->
+        <button class="like-button" onclick="addLike()">Sviđa mi se</button>
+        <p class="like-count"><span id="likeNumber">230</span> ljudi je reklo da im se ovo sviđa</p>
     </div>
 
     <script>
-        let likeCount = 230;
-
-        function increaseLikes() {
-            likeCount++;
-            document.getElementById('like-count').innerText = likeCount + ' ljudi je reklo da im se ovo sviđa';
+        // Funkcija koja dohvaća broj lajkova iz LocalStorage-a ili postavlja početnu vrednost
+        function getLikes() {
+            return localStorage.getItem("likeCount") ? parseInt(localStorage.getItem("likeCount")) : 230;
         }
+
+        // Funkcija koja povećava broj lajkova i ažurira LocalStorage
+        function addLike() {
+            let likes = getLikes() + 1;
+            localStorage.setItem("likeCount", likes);
+            document.getElementById("likeNumber").innerText = likes;
+        }
+
+        // Postavljanje početne vrednosti prilikom učitavanja stranice
+        document.getElementById("likeNumber").innerText = getLikes();
     </script>
       <div class="gallery">
     <img src="https://raw.githubusercontent.com/HaxWitcher/viber-grupa/main/img1.jpg" alt="Preporuka 1">
